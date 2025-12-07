@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import frontpage
+from app.views import frontpage, check_naturalness
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/check/", check_naturalness),
     path("", frontpage),
 ]
