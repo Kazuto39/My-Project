@@ -26,3 +26,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Python
+*.pyc
+__pycache__/
+
+# Node / React
+build/

@@ -7,8 +7,16 @@ function App() {
   const [response, setResponse] = useState("");
 
   const handleCheck = () => {
-    axios.post("http://localhost:8000/api/check/", { text })
-      .then(res => setResponse(res.data.message))
+    axios.post("http://127.0.0.1:8000/api/check/", { text })
+      .then(res => {
+        // Django からのレスポンスに合わせる
+        const avg = res.data.average_z_score;
+        const marked = res.data.marked;
+
+        setResponse(
+          `Average Z-Score: ${avg}\n\nMarked Bigrams:\n${JSON.stringify(marked, null, 2)}`
+        );
+      })
       .catch(err => console.error(err));
   };
 
@@ -28,7 +36,7 @@ function App() {
       <button onClick={handleCheck}>Check</button>
 
       <h3>Result:</h3>
-      <p>{response}</p>
+      <pre>{response}</pre>
     </div>
   );
 }

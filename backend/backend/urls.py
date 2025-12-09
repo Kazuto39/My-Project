@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import frontpage, check_naturalness
+from app.views import frontpage, check_bigrams
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/check/", check_naturalness),
+    path("api/check/", check_bigrams, name="check_bigrams"),
     path("", frontpage),
 ]
