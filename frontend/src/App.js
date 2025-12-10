@@ -7,7 +7,9 @@ function App() {
   const [response, setResponse] = useState("");
 
   const handleCheck = () => {
-    axios.post("http://127.0.0.1:8000/api/check/", { text })
+    // React（フロントエンド）から Django（バックエンド）のAPIへ
+    // text を JSON として POST する
+    axios.post("http://127.0.0.1:8000/api/check/", { text }) 
       .then(res => {
         // Django からのレスポンスに合わせる
         const avg = res.data.average_z_score;

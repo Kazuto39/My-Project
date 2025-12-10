@@ -124,14 +124,15 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-# CORS settings
-CORS_ALLOW_ALL_ORIGINS = True  # 開発中ならこれでOK
-# 下記でもOK（より安全）
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-# ]
+
+# 開発中はフロントエンド（React）との通信を簡単にするため True で問題ありません。
+# ただし本番環境では非常に危険（どのドメインからのアクセスも許可してしまう）ため、
+# 必ず False にして、CORS_ALLOWED_ORIGINS で許可するドメインを明示的に指定してください。
+CORS_ALLOW_ALL_ORIGINS = True  # 開発中はTrue
+
 
 # Django が POST を受け取れるように
 CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:3000",
     "http://localhost:3000",
 ]
