@@ -32,25 +32,32 @@ def evaluate_naturalness(text):
         bigram = f"{words[i]} {words[i+1]}"
         z_score = ngram_data.get(bigram)
 
+        # CSV に存在する場合
         if z_score is not None:
-         # ★ここで4段階分類を行う
             if z_score >= 1.0:
-             status = "Very Natural"
+                status = "Very Natural"
             elif z_score >= 0.0:
-                 status = "Natural"
+                status = "Natural"
             elif z_score >= -1.0:
-                 status = "Slightly Unnatural"
-            else: status = "Unnatural"
+                status = "Slightly Unnatural"
+            else:
+                status = "Unnatural"
 
             z_scores.append(z_score)
-        
-        else:
-         # CSVに存在しないbigramは非常に低い頻度とみなす
-            z_score = -1.0
-            status = "Unnatural" 
-            results.append({ "bigram": bigram, "z_score": round(z_score, 3), "status": status })
 
-    # 文全体の平均zスコア
+        # CSV に存在しない場合
+        else:
+            z_score = -1.0
+            status = "Unnatural"
+
+        # ← ここで必ず追加（重要）
+        results.append({
+            "bigram": bigram,
+            "z_score": round(z_score, 3),
+            "status": status
+        })
+
+    # 平均
     avg_z = round(sum(z_scores) / len(z_scores), 3) if z_scores else 0.0
 
     return results, avg_z
