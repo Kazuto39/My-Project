@@ -8,10 +8,15 @@ This is my research for graduation thesis
 git clone https://github.com/IchikaCoding/habit-tracker-v1.git
 cd habit-tracker-v1
 ```
-依存パッケージのインストール
-`npm install`
 
-開発サーバーの起動
-`npm run dev`
+2.依存パッケージのインストール
+```
+npm install
+```
+
+3.開発サーバーの起動
+```
+npm run dev
+```
 
 ブラウザで http://localhost:3000 を開く
